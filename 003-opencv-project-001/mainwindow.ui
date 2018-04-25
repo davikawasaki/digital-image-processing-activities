@@ -41,6 +41,7 @@
      <addaction name="actionMediana"/>
      <addaction name="actionMinimo"/>
      <addaction name="actionMaximo"/>
+     <addaction name="actionGaussiano"/>
     </widget>
     <widget class="QMenu" name="menuImagem_colorida">
      <property name="title">
@@ -49,6 +50,7 @@
      <addaction name="actionBrilho"/>
      <addaction name="actionEqualiza_ao_de_Histograma"/>
      <addaction name="actionMediana_2"/>
+     <addaction name="actionGaussiana"/>
     </widget>
     <addaction name="actionNegativo"/>
     <addaction name="actionAjuste_de_Contraste"/>
@@ -148,6 +150,16 @@
   <action name="actionMediana_2">
    <property name="text">
     <string>Mediana</string>
+   </property>
+  </action>
+  <action name="actionGaussiano">
+   <property name="text">
+    <string>Gaussiano</string>
+   </property>
+  </action>
+  <action name="actionGaussiana">
+   <property name="text">
+    <string>Gaussiana</string>
    </property>
   </action>
  </widget>

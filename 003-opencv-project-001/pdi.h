@@ -26,9 +26,13 @@ class PDI
         void filtroMediana();
         void filtroMinima();
         void filtroMaximo();
+        void filtroGaussiana();
         void brilhoHSV();
         void equalizacaoHistogramaHSV();
         void filtroMedianaHSV();
+        void filtroGaussianaHSV();
+        float _gaussianaBidimensional(int x, int y, float sigma);
+        Mat _constructMatrix(int maskA, int indexA, int maskB, int indexB, float sigma, Mat mask);
 
         //atributos
         Mat imagemRGB;

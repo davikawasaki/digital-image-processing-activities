@@ -383,6 +383,47 @@ void PDI::filtroMaximo()
      imshow("Filtro do Máximo", g);
 }
 
+void PDI::filtroGaussiana()
+{
+    // Montando máscara 5x5 com sigma 1
+    int maskA = 5, maskB = 5;
+    Mat mask = Mat(maskA, maskB, CV_32FC3);
+    float sigma = 1;
+
+    // Iterando cada coordenada em cima da função Gaussiana Bidimensional
+    int indexA = round((maskA - 1)/2);
+    int indexB = round((maskB - 1)/2);
+    mask = PDI::_constructMatrix(maskA, indexA, maskB, indexB, sigma, mask);
+
+    Mat f = imagemCINZA.clone();
+    Mat g = imagemCINZA.clone();
+    //percorre a imagem inteira
+    for(int x=0;x<f.rows;x++)
+    {
+        for(int y=0;y<f.cols;y++)
+        {
+            float soma = 0;
+            //percorre uma mascara 5x5
+            for(int i=-indexA; i<=indexA; i++)
+            {
+                for(int j=-indexB; j<=indexB; j++)
+                {
+                    //caso pixels da mascara estejam fora dos limites da imagem
+                    //usa-se espelhamento de pixels
+                    if(((x+i)<0 && (y+j)<0)||((x+i)>=f.rows && (y+j)>=f.cols)) soma += (float)f.at<uchar>(x-i,y-j)*mask.at<float>(i+indexA,j+indexB);
+                    else if(((x+i)<0)||((x+i)>=f.rows)) soma += (float)f.at<uchar>(x-i,y+j)*mask.at<float>(i+indexA,j+indexB);
+                    else if(((y+i)<0)||((y+i)>=f.cols)) soma += (float)f.at<uchar>(x+i,y-j)*mask.at<float>(i+indexA,j+indexB);
+                    //caso todos os pixels da mascara estejam dentro dos limites da imagem
+                    else soma += (float)f.at<uchar>(x+i,y+j)*mask.at<float>(i+indexA,j+indexB);
+                }
+            }
+            g.at<uchar>(x,y)=soma;
+        }
+    }
+    //exibe a imagem na janela
+    imshow("Filtro Gaussiano", g);
+}
+
 void PDI::brilhoHSV()
 {
     Mat imagemHSV;
@@ -570,4 +611,104 @@ void PDI::filtroMedianaHSV()
     cvtColor(imagemHSV, imagemSaida, CV_HSV2BGR);
     //exibe a imagem RGB na janela
     imshow("Filtro da Mediana", imagemSaida);
+}
+
+void PDI::filtroGaussianaHSV()
+{
+    // Montando máscara 5x5 com sigma 1
+    int maskA = 5, maskB = 5;
+//    float mask[maskA][maskB];
+    Mat mask = Mat(maskA, maskB, CV_32FC3);
+    float sigma = 1;
+
+    // Iterando cada coordenada em cima da função Gaussiana Bidimensional
+    int indexA = round((maskA - 1)/2);
+    int indexB = round((maskB - 1)/2);
+    mask = PDI::_constructMatrix(maskA, indexA, maskB, indexB, sigma, mask);
+
+    Mat imagemHSV;
+    //converte uma imagem RGB para HSV
+    cvtColor(imagemRGB, imagemHSV, CV_BGR2HSV);
+    vector<Mat> planosHSV;
+    //divide a imagem HSV em 3 planos de pixels
+    // Matriz // Vetor de matriz
+    split(imagemHSV, planosHSV);
+    vector<Mat> planosHSVCopy;
+    for(int v=0; v<planosHSV.size(); v++) {
+        planosHSVCopy.push_back(planosHSV[v]);
+    }
+
+    for(int z=0; z<planosHSV.size(); z++)
+    {
+        if (z == 2)
+        {
+             //percorre a imagem inteira
+             for(int x=0;x<planosHSV[z].rows;x++)
+             {
+                 for(int y=0;y<planosHSV[z].cols;y++)
+                 {
+                     float soma = 0;
+                     //percorre uma mascara 5x5
+                     for(int i=-indexA; i<=indexA; i++)
+                     {
+                         for(int j=-indexB; j<=indexB; j++)
+                         {
+                             //caso pixels da mascara estejam fora dos limites da imagem
+                             //usa-se espelhamento de pixels
+                             if(((x+i)<0 && (y+j)<0)||((x+i)>=planosHSV[z].rows && (y+j)>=planosHSV[z].cols)) soma += planosHSV[z].at<uchar>(x-i,y-j)*mask.at<float>(i+indexA,j+indexB);
+                             else if(((x+i)<0)||((x+i)>=planosHSV[z].rows)) soma += planosHSV[z].at<uchar>(x-i,y+j)*mask.at<float>(i+indexA,j+indexB);
+                             else if(((y+i)<0)||((y+i)>=planosHSV[z].cols)) soma += planosHSV[z].at<uchar>(x+i,y-j)*mask.at<float>(i+indexA,j+indexB);
+                             //caso todos os pixels da mascara estejam dentro dos limites da imagem
+                             else soma += planosHSV[z].at<uchar>(x+i,y+j)*mask.at<float>(i+indexA,j+indexB);
+                         }
+                     }
+                     planosHSVCopy[z].at<uchar>(x,y)=soma;
+                 }
+             }
+        }
+        else
+        {
+            // Não realiza modificações nos canais H e S
+        }
+    }
+    //combina os 3 planos de pixels (H,S,V) novamente
+    merge(planosHSVCopy,imagemHSV);
+    Mat imagemSaida;
+    //converte uma imagem HSV para RGB
+    cvtColor(imagemHSV, imagemSaida, CV_HSV2BGR);
+    //exibe a imagem RGB na janela
+    imshow("Filtro da Gaussiana", imagemSaida);
+}
+
+float PDI::_gaussianaBidimensional(int x, int y, float sigma)
+{
+    float A = (1/(2*M_PI*pow(sigma, 2)));
+    float gaus = A*exp(-(pow(x,2)+pow(y,2))/(2*pow(sigma, 2)));
+    return gaus;
+}
+
+Mat PDI::_constructMatrix(int maskA, int indexA, int maskB, int indexB, float sigma, Mat mask)
+{
+    float _soma = 0;
+    float value = 0;
+    for(int i=-indexA; i<=indexA; i++)
+    {
+        for(int j=-indexB; j<=indexB; j++)
+        {
+            value = PDI::_gaussianaBidimensional(i, j, sigma);
+            mask.at<float>(i+indexA, j+indexB) = value;
+            _soma += value;
+        }
+    }
+
+    // Obtendo máscara final da gaussiana
+    // Iterando cada coordenada obtida pela gaussiana e dividindo pela soma total obtida anteriormente
+    for(int i=0; i<maskA; i++)
+    {
+        for(int j=0; j<maskB; j++)
+        {
+            mask.at<float>(i,j) = (float)(mask.at<float>(i,j)/_soma);
+        }
+    }
+    return mask;
 }

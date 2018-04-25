@@ -90,3 +90,13 @@ void MainWindow::on_actionMediana_2_triggered()
 {
     pdi->filtroMedianaHSV();
 }
+
+void MainWindow::on_actionGaussiano_triggered()
+{
+    pdi->filtroGaussiana();
+}
+
+void MainWindow::on_actionGaussiana_triggered()
+{
+    pdi->filtroGaussianaHSV();
+}

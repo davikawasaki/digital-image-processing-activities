@@ -45,6 +45,10 @@ private slots:
 
     void on_actionMediana_2_triggered();
 
+    void on_actionGaussiano_triggered();
+
+    void on_actionGaussiana_triggered();
+
 private:
     Ui::MainWindow *ui;
     PDI *pdi;
