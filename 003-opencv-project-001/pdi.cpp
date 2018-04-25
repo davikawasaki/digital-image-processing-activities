@@ -328,7 +328,7 @@ void PDI::filtroMinima()
      {
          for(int y=0;y<f.cols;y++)
          {
-             vector<int> minimo;
+             vector<float> minimo;
              //percorre uma mascara 3x3
              for(int i=-1; i<2; i++)
              {
@@ -336,11 +336,11 @@ void PDI::filtroMinima()
                  {
                      //caso pixels da mascara estejam fora dos limites da imagem
                      //usa-se espelhamento de pixels
-                     if(((x+i)<0 && (y+j)<0)||((x+i)>=f.rows && (y+j)>=f.cols)) minimo.push_back((int)f.at<uchar>(x-i,y-j));
-                     else if(((x+i)<0)||((x+i)>=f.rows)) minimo.push_back((int)f.at<uchar>(x-i,y+j));
-                     else if(((y+i)<0)||((y+i)>=f.cols)) minimo.push_back((int)f.at<uchar>(x+i,y-j));
+                     if(((x+i)<0 && (y+j)<0)||((x+i)>=f.rows && (y+j)>=f.cols)) minimo.push_back((float)f.at<uchar>(x-i,y-j));
+                     else if(((x+i)<0)||((x+i)>=f.rows)) minimo.push_back((float)f.at<uchar>(x-i,y+j));
+                     else if(((y+i)<0)||((y+i)>=f.cols)) minimo.push_back((float)f.at<uchar>(x+i,y-j));
                      //caso todos os pixels da mascara estejam dentro dos limites da imagem
-                     else minimo.push_back((int)f.at<uchar>(x+i,y+j));
+                     else minimo.push_back((float)f.at<uchar>(x+i,y+j));
                  }
              }
              sort(minimo.begin(), minimo.end());
@@ -348,7 +348,7 @@ void PDI::filtroMinima()
          }
      }
      //exibe a imagem na janela
-     imshow("Filtro do Mínimo", g);
+     imshow("Filtro do Minimo", g);
 }
 
 void PDI::filtroMaximo()
@@ -360,7 +360,7 @@ void PDI::filtroMaximo()
      {
          for(int y=0;y<f.cols;y++)
          {
-             vector<int> maximo;
+             vector<float> maximo;
              //percorre uma mascara 3x3
              for(int i=-1; i<2; i++)
              {
@@ -368,11 +368,11 @@ void PDI::filtroMaximo()
                  {
                      //caso pixels da mascara estejam fora dos limites da imagem
                      //usa-se espelhamento de pixels
-                     if(((x+i)<0 && (y+j)<0)||((x+i)>=f.rows && (y+j)>=f.cols)) maximo.push_back((int)f.at<uchar>(x-i,y-j));
-                     else if(((x+i)<0)||((x+i)>=f.rows)) maximo.push_back((int)f.at<uchar>(x-i,y+j));
-                     else if(((y+i)<0)||((y+i)>=f.cols)) maximo.push_back((int)f.at<uchar>(x+i,y-j));
+                     if(((x+i)<0 && (y+j)<0)||((x+i)>=f.rows && (y+j)>=f.cols)) maximo.push_back((float)f.at<uchar>(x-i,y-j));
+                     else if(((x+i)<0)||((x+i)>=f.rows)) maximo.push_back((float)f.at<uchar>(x-i,y+j));
+                     else if(((y+i)<0)||((y+i)>=f.cols)) maximo.push_back((float)f.at<uchar>(x+i,y-j));
                      //caso todos os pixels da mascara estejam dentro dos limites da imagem
-                     else maximo.push_back((int)f.at<uchar>(x+i,y+j));
+                     else maximo.push_back((float)f.at<uchar>(x+i,y+j));
                  }
              }
              sort(maximo.begin(), maximo.end());
@@ -380,7 +380,7 @@ void PDI::filtroMaximo()
          }
      }
      //exibe a imagem na janela
-     imshow("Filtro do Máximo", g);
+     imshow("Filtro do Maximo", g);
 }
 
 void PDI::filtroGaussiana()
