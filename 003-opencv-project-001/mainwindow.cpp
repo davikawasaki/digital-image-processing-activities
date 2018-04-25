@@ -1,3 +1,4 @@
+// Davi Shinji Mota Kawasaki - 1137280
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>

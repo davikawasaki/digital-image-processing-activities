@@ -1,3 +1,4 @@
+// Davi Shinji Mota Kawasaki - 1137280
 #include "pdi.h"
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>

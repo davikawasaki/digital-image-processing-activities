@@ -1,3 +1,4 @@
+// Davi Shinji Mota Kawasaki - 1137280
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
