@@ -1,0 +1,13 @@
+@relation algoritmo_cadeia_imagem_fish
+
+@attribute 0 real
+@attribute 1 real
+@attribute 2 real
+@attribute 3 real
+@attribute 4 real
+@attribute 5 real
+@attribute 6 real
+@attribute 7 real
+
+@data
+894,331,621,155,976,325,551,23

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>557</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>557</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuArquivo">
+    <property name="title">
+     <string>Arquivo</string>
+    </property>
+    <addaction name="actionAbrir_Imagem"/>
+   </widget>
+   <widget class="QMenu" name="menuFiltros">
+    <property name="title">
+     <string>Realce</string>
+    </property>
+    <widget class="QMenu" name="menuFiltros_2">
+     <property name="title">
+      <string>Filtros - Imagem Monocromática</string>
+     </property>
+     <addaction name="actionMedia"/>
+     <addaction name="actionMediana"/>
+     <addaction name="actionMinimo"/>
+     <addaction name="actionMaximo"/>
+     <addaction name="actionGaussiano"/>
+    </widget>
+    <widget class="QMenu" name="menuImagem_colorida">
+     <property name="title">
+      <string>Imagem colorida</string>
+     </property>
+     <addaction name="actionBrilho"/>
+     <addaction name="actionEqualiza_ao_de_Histograma"/>
+     <addaction name="actionMediana_2"/>
+     <addaction name="actionGaussiana"/>
+    </widget>
+    <addaction name="actionNegativo"/>
+    <addaction name="actionAjuste_de_Contraste"/>
+    <addaction name="actionTransformacao_Logaritmica"/>
+    <addaction name="actionTransformacao_de_Potencia"/>
+    <addaction name="actionEqualizacaoHistograma"/>
+    <addaction name="menuFiltros_2"/>
+    <addaction name="menuImagem_colorida"/>
+   </widget>
+   <widget class="QMenu" name="menuOp_es">
+    <property name="title">
+     <string>Opções</string>
+    </property>
+    <addaction name="actionHistograma"/>
+    <addaction name="actionTransforma_es_Morfol_gicas"/>
+   </widget>
+   <widget class="QMenu" name="menuSegmenta_o">
+    <property name="title">
+     <string>Segmentação</string>
+    </property>
+    <addaction name="actionLimiar"/>
+    <addaction name="actionSobel"/>
+    <addaction name="actionCanny"/>
+   </widget>
+   <widget class="QMenu" name="menuCaracter_sticas">
+    <property name="title">
+     <string>Características</string>
+    </property>
+    <addaction name="actionCor_BIC"/>
+    <addaction name="actionForma"/>
+   </widget>
+   <addaction name="menuArquivo"/>
+   <addaction name="menuFiltros"/>
+   <addaction name="menuOp_es"/>
+   <addaction name="menuSegmenta_o"/>
+   <addaction name="menuCaracter_sticas"/>
+  </widget>
+  <action name="actionAbrir_Imagem">
+   <property name="text">
+    <string>Abrir Imagem</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="actionHistograma">
+   <property name="text">
+    <string>Histograma</string>
+   </property>
+  </action>
+  <action name="actionEqualizacaoHistograma">
+   <property name="text">
+    <string>Equalização de Histograma</string>
+   </property>
+  </action>
+  <action name="actionNegativo">
+   <property name="text">
+    <string>Negativo</string>
+   </property>
+  </action>
+  <action name="actionAjuste_de_Contraste">
+   <property name="text">
+    <string>Ajuste de Contraste</string>
+   </property>
+  </action>
+  <action name="actionTransformacao_de_Potencia">
+   <property name="text">
+    <string>Transformação de Potência</string>
+   </property>
+  </action>
+  <action name="actionTransformacao_Logaritmica">
+   <property name="text">
+    <string>Transformação Logarítmica</string>
+   </property>
+  </action>
+  <action name="actionMedia">
+   <property name="text">
+    <string>Media</string>
+   </property>
+  </action>
+  <action name="actionBrilho">
+   <property name="text">
+    <string>Brilho</string>
+   </property>
+  </action>
+  <action name="actionMediana">
+   <property name="text">
+    <string>Mediana</string>
+   </property>
+  </action>
+  <action name="actionMinimo">
+   <property name="text">
+    <string>Minimo</string>
+   </property>
+  </action>
+  <action name="actionMaximo">
+   <property name="text">
+    <string>Maximo</string>
+   </property>
+  </action>
+  <action name="actionEqualiza_ao_de_Histograma">
+   <property name="text">
+    <string>Equalizaçao de Histograma</string>
+   </property>
+  </action>
+  <action name="actionMediana_2">
+   <property name="text">
+    <string>Mediana</string>
+   </property>
+  </action>
+  <action name="actionGaussiano">
+   <property name="text">
+    <string>Gaussiano</string>
+   </property>
+  </action>
+  <action name="actionGaussiana">
+   <property name="text">
+    <string>Gaussiana</string>
+   </property>
+  </action>
+  <action name="actionLimiar">
+   <property name="text">
+    <string>Limiar</string>
+   </property>
+  </action>
+  <action name="actionSobel">
+   <property name="text">
+    <string>Sobel</string>
+   </property>
+  </action>
+  <action name="actionCanny">
+   <property name="text">
+    <string>Canny</string>
+   </property>
+  </action>
+  <action name="actionHough_Circles">
+   <property name="text">
+    <string>Hough Circles</string>
+   </property>
+  </action>
+  <action name="actionAbertura">
+   <property name="text">
+    <string>Abertura</string>
+   </property>
+  </action>
+  <action name="actionFechamento">
+   <property name="text">
+    <string>Fechamento</string>
+   </property>
+  </action>
+  <action name="actionCor_BIC">
+   <property name="text">
+    <string>Cor (BIC)</string>
+   </property>
+  </action>
+  <action name="actionForma">
+   <property name="text">
+    <string>Forma</string>
+   </property>
+  </action>
+  <action name="actionTransforma_es_Morfol_gicas">
+   <property name="text">
+    <string>Transformações Morfológicas</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
